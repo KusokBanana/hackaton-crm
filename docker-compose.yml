@@ -15,8 +15,8 @@ services:
             - symfony
     php-fpm:
         container_name: crm_php
-        links:
-            - database
+#        links:
+#            - database
         build:
             context: .
             dockerfile: docker/php-fpm/Dockerfile
@@ -24,8 +24,8 @@ services:
             - ./:/var/www/
         networks:
             - symfony
-        depends_on:
-            - database
+#        depends_on:
+#            - database
     nginx:
         container_name: crm_nginx
         build:
