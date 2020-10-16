@@ -1,17 +1,33 @@
 version: '3'
 
 services:
+    database:
+        image: postgres
+        container_name: crm_db
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_DB: ${DB_NAME}
+        networks:
+            - symfony
     php-fpm:
+        container_name: crm_php
+        links:
+            - database
         build:
             context: .
             dockerfile: docker/php-fpm/Dockerfile
-            args:
-                TIMEZONE: ${TIMEZONE}
         volumes:
             - ./:/var/www/
         networks:
             - symfony
+        depends_on:
+            - database
     nginx:
+        container_name: crm_nginx
         build:
             context: .
             dockerfile: docker/nginx/Dockerfile
@@ -21,6 +37,14 @@ services:
             - 8000:80
         networks:
             - symfony
+
+    composer:
+        image: composer
+        command: ["composer", "install", "--no-ansi"]
+        volumes:
+            - ./composer.lock:/app/composer.lock
+            - ./composer.json:/app/composer.json
+            - ./vendor:/app/vendor
 
 networks:
     symfony:
