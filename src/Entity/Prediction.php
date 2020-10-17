@@ -11,14 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Prediction
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
 
     /**
+     * @ORM\Id
      * @ORM\OneToOne(targetEntity=Client::class, inversedBy="prediction", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -39,10 +34,10 @@ class Prediction
      */
     private float $creditCardChance;
 
-    public function getId(): int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\Column(type="float", options={ "default": 0 })
+     */
+    private float $sumChance;
 
     public function getClient(): Client
     {
@@ -69,5 +64,10 @@ class Prediction
     public function getCreditCardChance(): float
     {
         return $this->creditCardChance;
+    }
+
+    public function getSumChance(): float
+    {
+        return $this->sumChance;
     }
 }

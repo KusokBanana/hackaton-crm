@@ -20,7 +20,7 @@ class ClientController extends AbstractController
      */
     public function index()
     {
-        $clients = $this->clientRepository->findAll();
+        $clients = $this->clientRepository->findAndSortByPredictions();
 
         return $this->json([
             'data' => $clients,

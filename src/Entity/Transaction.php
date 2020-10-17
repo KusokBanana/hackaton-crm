@@ -13,7 +13,8 @@ class Transaction
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="id", initialValue=1)
      * @ORM\Column(type="integer")
      */
     private int $id;

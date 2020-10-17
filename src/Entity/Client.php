@@ -93,11 +93,17 @@ class Client
     /**
      * @ORM\OneToOne(targetEntity=Prediction::class, mappedBy="client", cascade={"persist", "remove"})
      */
-    private Prediction $prediction;
+    private ?Prediction $prediction;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="client")
+     */
+    private $tasks;
 
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
     }
 
     public function getId(): int
@@ -220,6 +226,37 @@ class Client
         // set the owning side of the relation if necessary
         if ($prediction->getClient() !== $this) {
             $prediction->setClient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            // set the owning side to null (unless already changed)
+            if ($task->getClient() === $this) {
+                $task->setClient(null);
+            }
         }
 
         return $this;
