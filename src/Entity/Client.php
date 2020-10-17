@@ -90,6 +90,11 @@ class Client
      */
     private Collection $transactions;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Prediction::class, mappedBy="client", cascade={"persist", "remove"})
+     */
+    private Prediction $prediction;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -198,6 +203,23 @@ class Client
             if ($transaction->getClient() === $this) {
                 $transaction->setClient(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getPrediction(): ?Prediction
+    {
+        return $this->prediction;
+    }
+
+    public function setPrediction(Prediction $prediction): self
+    {
+        $this->prediction = $prediction;
+
+        // set the owning side of the relation if necessary
+        if ($prediction->getClient() !== $this) {
+            $prediction->setClient($this);
         }
 
         return $this;
