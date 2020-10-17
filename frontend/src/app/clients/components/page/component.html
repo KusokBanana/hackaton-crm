@@ -1,0 +1,16 @@
+<div class="row gap-20 masonry pos-r">
+    <div class="masonry-sizer col-md-6"></div>
+    <div class="masonry-item  w-100">
+
+    <p class="title">Клиенты</p>
+
+    <div class="masonry-item col-12">
+      <div class="bd bgc-white">
+        <div>
+            <app-client *ngFor="let client of clients$ | async" [client]="client"></app-client>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  float: left;
+  color: #000000;
+}
+
+.phone {
+  float: right;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 8px rgba(140, 128, 200, 0.2);
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  left: 770px;
+  top: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.task {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: solid 1px #e8e3e3;
+}
+
+.edit {
+  width: 16px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.remove {
+  width: 16px;
+  padding-top: 8px;
+  cursor: pointer;
+}
