@@ -11,6 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
+    const TASK_STATUS_OPENED = 'opened';
+    const TASK_STATUS_SUCCESS = 'success';
+    const TASK_STATUS_FAIL = 'fail';
+
+    const TASK_STATUSES = [
+        self::TASK_STATUS_OPENED,
+        self::TASK_STATUS_SUCCESS,
+        self::TASK_STATUS_FAIL,
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -24,6 +34,21 @@ class Task
      * @ORM\JoinColumn(nullable=false)
      */
     private Client $client;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private \DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $date;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?\DateTimeInterface $closedAt;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -41,11 +66,6 @@ class Task
     private ?string $type;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private ?\DateTimeInterface $date;
-
-    /**
      * @ORM\Column(type="boolean", options={ "default": false })
      */
     private bool $phone;
@@ -60,6 +80,11 @@ class Task
      */
     private bool $chat;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $status;
+
     public function __construct(
         Client $client,
         string $name,
@@ -71,6 +96,9 @@ class Task
         bool $chat
     )
     {
+        $this->createdAt = new \DateTime();
+        $this->status = self::TASK_STATUS_OPENED;
+
         $this->client = $client;
         $this->name = $name;
         $this->description = $description;
@@ -79,6 +107,19 @@ class Task
         $this->phone = $phone;
         $this->email = $email;
         $this->chat = $chat;
+    }
+
+    public function close(string $status, ?string $description): void
+    {
+        $this->status = $status;
+        $this->closedAt = new \DateTime();
+        $this->description = $description ?: $this->description;
+    }
+
+    public function restore(): void
+    {
+        $this->status = self::TASK_STATUS_OPENED;
+        $this->closedAt = null;
     }
 
     public function getId(): ?int
@@ -113,9 +154,19 @@ class Task
         return $this->type;
     }
 
+    public function getCreatedAt(): \DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
+    }
+
+    public function getClosedAt(): ?\DateTimeInterface
+    {
+        return $this->closedAt;
     }
 
     public function getPhone(): bool
@@ -131,5 +182,10 @@ class Task
     public function getChat(): bool
     {
         return $this->chat;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 }

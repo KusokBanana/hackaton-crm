@@ -1,11 +1,40 @@
 .title {
-    font-family: TT Firs Neue;
+  font-family: TT Firs Neue;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 34px;
+  display: flex;
+  align-items: center;
+
+  color: hsl(0, 0%, 22%);
+}
+
+.block {
+  background: #FFFFFF;
+  box-shadow: 0px 2px 10px rgba(111, 135, 238, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+
+  &:first-of-type {
+    margin-right: 60px;
+  }
+}
+
+.statistic {
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #E9EEF1;
+
+  .statistic-title {
+    // font-family: TT Firs Neue;
     font-style: normal;
-    font-weight: normal;
-    font-size: 26px;
-    line-height: 34px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
     display: flex;
     align-items: center;
-    
-    color: hsl(0, 0%, 22%);
+
+    color: #4886FF;
   }
+}

@@ -7,17 +7,15 @@
   color: #000000;
 }
 
-.phone {
-  float: right;
-  background: #FFFFFF;
-  box-shadow: 0px 1px 8px rgba(140, 128, 200, 0.2);
-  border-radius: 5px;
+.icons {
+  width: 30%;
+  text-align: right;
+}
+
+.phone, .email, .chat {
   width: 30px;
-  height: 30px;
-  left: 770px;
-  top: 70px;
-  text-align: center;
   cursor: pointer;
+  margin-left: 1rem;
 }
 
 .task {

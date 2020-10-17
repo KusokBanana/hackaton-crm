@@ -2,9 +2,33 @@
     display: block;
     font-size: 15px;
     font-weight: 500;
-    padding: 5px 15px;
+    padding: 5px 25px;
     position: relative;
     white-space: nowrap;
     font-weight: bolder;
     opacity: .7;
+}
+
+.sidebar-menu {
+    li {
+        padding-left: 5px;
+
+        &.active {
+            background: #F4FCE7;
+            border-left: 5px solid #A7D066;
+            padding-left: 0;
+        }
+
+        .icon-holder {
+            vertical-align: middle;
+        }
+    }
+}
+
+
+
+.logo {
+    text-align: right;
+    padding-top: 22px;
+    padding-right: 8px;
 }

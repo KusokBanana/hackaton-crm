@@ -1,17 +1,41 @@
 <div class="task">
   <div class="clearfix">
-    <span class="title">Позвонить себе</span>
+    <p class="title">{{ task.name }}</p>
 
-    <div class="phone">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="icons float-right">
+
+      <svg *ngIf="task.phone" class="phone" width="16" height="16"
+        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M14.7368 10.5347C13.7499 10.5347 12.7832 10.3806 11.8669 10.0783C11.4198 9.92421 10.912 10.0429 10.6181 10.3427L8.80169 11.7145C6.71748 10.6021 5.38358 9.26906 4.28633 7.20001L5.62106 5.42653C5.95706 5.09053 6.07749 4.59873 5.93349 4.13811C5.62864 3.216 5.4737 2.24842 5.4737 1.26316C5.4737 0.566724 4.90698 0 4.21054 0H1.26316C0.566724 0 0 0.566724 0 1.26316C0 9.38863 6.61137 16 14.7368 16C15.4333 16 16 15.4333 16 14.7368V11.7979C16 11.1015 15.4333 10.5347 14.7368 10.5347Z"
           fill="#008BFD" />
       </svg>
+
+      <svg *ngIf="task.email" class="email" width="16" height="16"
+        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0)">
+          <path
+            d="M1.36787 2.114H14.6321C15.3398 2.11497 15.9303 2.65496 15.9943 3.35995L8.88697 9.3878C8.37758 9.82222 7.62806 9.82255 7.11835 9.38845L0.0055055 3.36562C0.0663862 2.65836 0.657868 2.11497 1.36787 2.114ZM1.36787 13.8504C1.06849 13.8507 0.777363 13.7523 0.539669 13.5703L4.50647 9.5128C4.57998 9.4388 4.60815 9.33113 4.5803 9.23074C4.55245 9.13019 4.47295 9.05247 4.37192 9.02689C4.27072 9.0013 4.16369 9.03191 4.09148 9.1072L0.161593 13.1268C0.0553759 12.9288 -0.000161564 12.7074 3.53032e-07 12.4825V4.12145L6.74335 9.83145C7.46938 10.4495 8.53674 10.4492 9.26229 9.83032L16 4.11594V12.4825C16.0003 12.7082 15.9443 12.9304 15.8372 13.1289L11.8839 9.10655C11.7714 8.99321 11.5885 8.99207 11.4746 9.10396C11.3607 9.21601 11.3586 9.39881 11.47 9.51328L15.4587 13.5716C15.2212 13.7528 14.9308 13.8507 14.6321 13.8504H1.36787Z"
+            fill="#8BDDD3" />
+        </g>
+        <defs>
+          <clipPath id="clip0">
+            <rect width="16" height="16" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <svg *ngIf="task.chat" class="chat" width="16" height="16"
+        viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.10364 1.84892V9.79953H11.9448L16 11.4215V9.79953V1.84892H3.10364Z" fill="#8BDDD3" />
+        <path
+          d="M11.8939 10.7322L2.21989 10.7422V5.63352V4.42769H0V12.5039V14.1516L4.11822 12.5039H13.0986V11.2145L11.8939 10.7322Z"
+          fill="#8BDDD3" />
+      </svg>
     </div>
   </div>
 
-  <p>Последний срок: 18 октября</p>
+  <p *ngIf="task.date">Последний срок: {{ task.date | date:'dd.MM' }}</p>
 
   <div class="peers fxw-nw ai-c lh-1 justify-content-between">
 
@@ -24,28 +48,78 @@
       </div>
     </a>
 
-    <div class="w-30p@lg+ d-flex justify-content-between">
+    <div class="w-40p@lg+">
 
-      <div class="edit">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9.79024 2.25089L2.29077 9.75036L6.25332 13.7129L13.7528 6.21344L9.79024 2.25089Z" fill="#B7C2D0"/>
-          <path d="M15.7613 3.18866L12.8348 0.220615C12.5442 -0.0699626 12.0876 -0.0699626 11.8177 0.199859C11.8177 0.199859 11.8177 0.199859 11.797 0.220615L10.5101 1.50746L14.4744 5.49252L15.7613 4.20568C16.0519 3.9151 16.0519 3.45848 15.7613 3.18866Z" fill="#B7C2D0"/>
-          <path d="M1.70975 10.619L0.0700666 15.0191C-0.0752221 15.3927 0.111578 15.8078 0.485177 15.9531C0.651221 16.0154 0.838021 16.0154 1.00407 15.9531L5.40424 14.2927L1.70975 10.619Z" fill="#B7C2D0"/>
-          </svg>
-          
-          
+      <div *ngIf="active" class="d-flex justify-content-between">
+
+        <div class="edit">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.79024 2.25089L2.29077 9.75036L6.25332 13.7129L13.7528 6.21344L9.79024 2.25089Z" fill="#B7C2D0"/>
+            <path d="M15.7613 3.18866L12.8348 0.220615C12.5442 -0.0699626 12.0876 -0.0699626 11.8177 0.199859C11.8177 0.199859 11.8177 0.199859 11.797 0.220615L10.5101 1.50746L14.4744 5.49252L15.7613 4.20568C16.0519 3.9151 16.0519 3.45848 15.7613 3.18866Z" fill="#B7C2D0"/>
+            <path d="M1.70975 10.619L0.0700666 15.0191C-0.0752221 15.3927 0.111578 15.8078 0.485177 15.9531C0.651221 16.0154 0.838021 16.0154 1.00407 15.9531L5.40424 14.2927L1.70975 10.619Z" fill="#B7C2D0"/>
+            </svg>
+            
+        </div>
+  
+        <div class="remove">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.6667 2H10.6667V1.33334C10.6667 0.597969 10.0684 0 9.33334 0H6.66669C5.93166 0 5.33334 0.597969 5.33334 1.33334V2H3.33334C2.59831 2 2 2.59797 2 3.33334V4.33334C2 4.51759 2.14909 4.66669 2.33334 4.66669H13.6667C13.8509 4.66669 14 4.51759 14 4.33334V3.33334C14 2.59797 13.4017 2 12.6667 2ZM9.33334 2H6.66669V1.33334H9.33334V2Z" fill="#B7C2D0"/>
+            <path d="M13 5.33337H2.99997C2.81572 5.33337 2.66663 5.48246 2.66663 5.66671V14.6667C2.66663 15.4021 3.26494 16 3.99997 16H12C12.735 16 13.3333 15.4021 13.3333 14.6667V5.66668C13.3333 5.48246 13.1842 5.33337 13 5.33337Z" fill="#B7C2D0"/>
+            </svg>
+        </div>
+
+        <button (click)="modal.show()" class="btn btn-danger">Завершить</button>
+
       </div>
+      
+      <div *ngIf="!active" class="d-flex justify-content-between">
+        <button (click)="restore()" class="btn btn-default">Вернуть</button>
 
-      <div class="remove">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12.6667 2H10.6667V1.33334C10.6667 0.597969 10.0684 0 9.33334 0H6.66669C5.93166 0 5.33334 0.597969 5.33334 1.33334V2H3.33334C2.59831 2 2 2.59797 2 3.33334V4.33334C2 4.51759 2.14909 4.66669 2.33334 4.66669H13.6667C13.8509 4.66669 14 4.51759 14 4.33334V3.33334C14 2.59797 13.4017 2 12.6667 2ZM9.33334 2H6.66669V1.33334H9.33334V2Z" fill="#B7C2D0"/>
-          <path d="M13 5.33337H2.99997C2.81572 5.33337 2.66663 5.48246 2.66663 5.66671V14.6667C2.66663 15.4021 3.26494 16 3.99997 16H12C12.735 16 13.3333 15.4021 13.3333 14.6667V5.66668C13.3333 5.48246 13.1842 5.33337 13 5.33337Z" fill="#B7C2D0"/>
-          </svg>
+        <button class="btn btn-primary disabled">Выполнено</button>
       </div>
-
-      <button class="btn btn-danger">Завершить</button>
 
     </div>
 
+  </div>
+</div>
+
+
+
+<div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Завершаем задачу</h4>
+        <button type="button" class="close pull-right" (click)="modal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form">
+
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Описание" formControlName="description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="col-form-label text-right">Статус:</label>
+            <select class="form-control" placeholder="Описание" formControlName="status">
+              <option value="success">Успешно</option>
+              <option value="fail">Неудачно</option>
+            </select>
+
+          </div>
+
+        </form>
+
+        <div class="d-flex justify-content-between">
+
+          <button (click)="modal.hide()" class="btn btn-danger">Отмена</button>
+          <button (click)="complete()" class="btn btn-success">Завершить</button>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
