@@ -1,0 +1,37 @@
+.title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  float: left;
+  color: #000000;
+}
+
+.icons {
+  width: 30%;
+  text-align: right;
+}
+
+.phone, .email, .chat {
+  width: 30px;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.task {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: solid 1px #e8e3e3;
+}
+
+.edit {
+  width: 16px;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.remove {
+  width: 16px;
+  padding-top: 8px;
+  cursor: pointer;
+}

@@ -48,5 +48,18 @@ services:
             - ./composer.json:/app/composer.json
             - ./vendor:/app/vendor
 
+    angular:
+        container_name: crm_frontend
+        build:
+            context: .
+            dockerfile: docker/frontend/Dockerfile
+        ports:
+            - 80:4200
+        volumes:
+            - ./frontend:/var/www
+            - /var/www/node_modules
+        networks:
+            - symfony
+
 networks:
     symfony:

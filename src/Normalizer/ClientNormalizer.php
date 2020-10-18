@@ -20,6 +20,7 @@ final class ClientNormalizer implements NormalizerInterface, NormalizerAwareInte
             'age'    => $result->getAge(),
             'gender' => $result->getGenderCode(),
             'active' => $result->getCity(),
+            'prediction' => $this->normalizer->normalize($result->getPrediction()),
         ];
     }
 
