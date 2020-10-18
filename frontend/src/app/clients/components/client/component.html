@@ -10,9 +10,9 @@
       </div>
     </div>
 
-    <div class="peer">Ипотека: {{ client.prediction.mortgage_chance }}%</div>
-    <div class="peer">Потребительский кредит: {{ client.prediction.consumer_credit_chance }}%</div>
-    <div class="peer">Кредитная карта: {{ client.prediction.get_credit_card_chance }}%</div>
+    <div class="peer">Ипотека: {{ client.prediction.mortgage_chance * 100 | number }}%</div>
+    <div class="peer">Потребительский кредит: {{ client.prediction.consumer_credit_chance * 100 | number }}%</div>
+    <div class="peer">Кредитная карта: {{ client.prediction.credit_card_chance * 100 | number }}%</div>
 
     <div class="peer">
       <button class="btn btn-success" (click)="modal.show()">
@@ -55,7 +55,9 @@
           <div class="form-group row">
             <label class="col-sm-1 col-form-label text-right">Тип:</label>
             <select class="form-control col-sm-5" placeholder="Описание" formControlName="type">
-              <option value="">Кредит</option>
+              <option value="mortgage">Ипотека</option>
+              <option value="consumer_credit">Потребительский кредит</option>
+              <option value="credit_card">Кредитная карта</option>
             </select>
 
             <div class="col-sm-3 col-form-label justify-content-between">

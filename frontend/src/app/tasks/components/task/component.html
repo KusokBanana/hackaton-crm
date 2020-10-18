@@ -35,6 +35,10 @@
     </div>
   </div>
 
+  <p *ngIf="active && typeText">
+    {{ typeText }} ({{ chances * 100 | number }}%)
+  </p>
+
   <p *ngIf="task.date">Последний срок: {{ task.date | date:'dd.MM' }}</p>
 
   <div class="peers fxw-nw ai-c lh-1 justify-content-between">
