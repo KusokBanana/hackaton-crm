@@ -40,9 +40,11 @@ class TaskController extends AbstractController
         $filter = ['status' => [Task::TASK_STATUS_OPENED]];
         $order = ['createdAt' => 'DESC'];
         $tasks = $this->taskRepository->findBy($filter, $order, 100);
+        $total = $this->taskRepository->count($filter);
 
         return $this->json([
             'data' => $tasks,
+            'total' => $total,
         ]);
     }
 
@@ -54,9 +56,11 @@ class TaskController extends AbstractController
         $filter = ['status' => [Task::TASK_STATUS_FAIL, Task::TASK_STATUS_SUCCESS]];
         $order = ['closedAt' => 'DESC'];
         $tasks = $this->taskRepository->findBy($filter, $order, 100);
+        $total = $this->taskRepository->count($filter);
 
         return $this->json([
             'data' => $tasks,
+            'total' => $total,
         ]);
     }
 

@@ -146,27 +146,4 @@ class GenerateTasksCommand extends Command
         $this->entityManager->flush();
         $this->entityManager->clear();
     }
-
-//    private function addCard(): void
-//    {
-//        $expr = $this->entityManager->getExpressionBuilder();
-//
-//        $result = $this->entityManager->createQueryBuilder()
-//            ->select('IDENTITY(predictions.client) as id')
-//            ->from(Prediction::class, 'predictions')
-//            ->leftJoin(
-//                Task::class,
-//                'task',
-//                Join::WITH,
-//                sprintf("predictions.client = task.client AND task.type = '%s'", Task::TASK_TYPE_CREDIT_CARD),
-//            )
-//            ->where(
-//                $expr->andX(
-//                    $expr->gt('predictions.creditCardChance', ':chance'),
-//                    $expr->isNull('task.id'),
-//                )
-//            )
-//            ->setParameter('chance', self::MINIMUM_CHANCE)
-//            ->getQuery()->getArrayResult();
-//    }
 }

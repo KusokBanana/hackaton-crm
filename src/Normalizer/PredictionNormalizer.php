@@ -19,7 +19,7 @@ final class PredictionNormalizer implements NormalizerInterface, NormalizerAware
         return [
             'mortgage_chance'        => $result->getMortgageChance(),
             'consumer_credit_chance' => $result->getConsumerCreditChance(),
-            'get_credit_card_chance' => $result->getCreditCardChance(),
+            'credit_card_chance'     => $result->getCreditCardChance(),
         ];
     }
 

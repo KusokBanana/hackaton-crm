@@ -1,20 +1,20 @@
 <div class="client">
-  <div class="dropdown-toggle no-after fxw-nw peers ai-c lh-1 justify-content-between">
+  <div class="row dropdown-toggle no-after fxw-nw ai-c lh-1">
 
-    <div class="peer peers">
-      <div class="peer mR-10">
+    <div class="col-sm-2 peers">
+      <div class="peer mR-10 mL-10">
         <img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg" alt="">
       </div>
       <div class="peer align-self-center">
-        <span class="fsz-sm c-grey-900">Мария Сергеевна Кудряшова</span>
+        <span class="fsz-sm c-grey-900">{{ client.name }}</span>
       </div>
     </div>
 
-    <div class="peer">Ипотека: {{ client.prediction.mortgage_chance * 100 | number }}%</div>
-    <div class="peer">Потребительский кредит: {{ client.prediction.consumer_credit_chance * 100 | number }}%</div>
-    <div class="peer">Кредитная карта: {{ client.prediction.credit_card_chance * 100 | number }}%</div>
+    <div class="col-sm-2">Ипотека: {{ client.prediction.mortgage_chance * 100 | number }}%</div>
+    <div class="col-sm-3">Потребительский кредит: {{ client.prediction.consumer_credit_chance * 100 | number }}%</div>
+    <div class="col-sm-3">Кредитная карта: {{ client.prediction.credit_card_chance * 100 | number }}%</div>
 
-    <div class="peer">
+    <div class="col-sm-2 text-right">
       <button class="btn btn-success" (click)="modal.show()">
         Запланировать <i class="fa fa-calendar-plus-o"></i>
       </button>

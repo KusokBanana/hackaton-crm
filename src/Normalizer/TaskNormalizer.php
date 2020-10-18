@@ -31,12 +31,13 @@ final class TaskNormalizer implements NormalizerInterface, NormalizerAwareInterf
             'client'      => [
                 'id'     => $client->getId(),
                 'age'    => $client->getAge(),
+                'name'   => $client->getName(),
                 'gender' => $client->getGenderCode(),
                 'active' => $client->getCity(),
                 'prediction' => [
                     'mortgage_chance'        => $prediction->getMortgageChance(),
                     'consumer_credit_chance' => $prediction->getConsumerCreditChance(),
-                    'get_credit_card_chance' => $prediction->getCreditCardChance(),
+                    'credit_card_chance' => $prediction->getCreditCardChance(),
                 ],
             ]
         ];

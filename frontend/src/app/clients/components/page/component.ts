@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Client } from 'src/app/services/api/responses';
 import { ApiService } from 'src/app/services/api/service';
 
 @Component({
@@ -14,5 +15,9 @@ export class PageComponent {
     public clients$ = this.api.getClients().pipe(
         map(result => result.data),
     );
+
+    trackByFn(_: number, client: Client) {
+        return client.id;
+    }
 
 }

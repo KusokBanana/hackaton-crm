@@ -1,23 +1,18 @@
-import { Component, Input, OnChanges, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { take, takeUntil, tap } from 'rxjs/operators';
 import { Task, TaskTypes } from 'src/app/services/api/responses';
 import { ApiService } from 'src/app/services/api/service';
 
 @Component({
     selector: 'app-task',
     templateUrl: './component.html',
-    styleUrls: ['./component.scss']
+    styleUrls: ['./component.scss'],
 })
-export class TaskComponent implements OnChanges {
-    private readonly typeTexts = {
-        [TaskTypes.mortgage]: 'Ипотека',
-        [TaskTypes.consumer_credit]: 'Кредит',
-        [TaskTypes.credit_card]: 'Кредитная карта',
-    };
-
+export class TaskComponent implements OnInit, OnDestroy {
+    private readonly destroy$ = new Subject();
 
     @Input() task: Task;
     @Input() active: boolean;
@@ -28,7 +23,7 @@ export class TaskComponent implements OnChanges {
 
     public form = new FormGroup({
         description: new FormControl(),
-        status: new FormControl('success'),
+        status: new FormControl('success', Validators.required),
     });
 
     public typeText: string;
@@ -36,7 +31,7 @@ export class TaskComponent implements OnChanges {
 
     constructor(private api: ApiService) {}
 
-    ngOnChanges() {
+    ngOnInit() {
         switch(this.task.type) {
             case TaskTypes.mortgage:
                 this.typeText = 'Ипотека';
@@ -58,6 +53,7 @@ export class TaskComponent implements OnChanges {
             take(1),
             tap(() => this.change.next()),
             tap(() => this.modal.hide()),
+            takeUntil(this.destroy$),
         ).subscribe();
     }
 
@@ -66,6 +62,12 @@ export class TaskComponent implements OnChanges {
             take(1),
             tap(() => this.change.next()),
             tap(() => this.modal.hide()),
+            takeUntil(this.destroy$),
         ).subscribe();
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

@@ -24,7 +24,7 @@ class ClientRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->join('c.prediction', 'prediction')
             ->addOrderBy('prediction.sumChance', 'DESC')
-            ->setMaxResults(10)
+            ->setMaxResults(50)
             ->getQuery()
             ->getResult()
             ;

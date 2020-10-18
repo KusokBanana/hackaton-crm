@@ -4,10 +4,12 @@ export interface ClientsResponse {
 
 export interface TasksResponse {
     data: Task[];
+    total: number;
 }
 
 export interface Client {
     id: number;
+    name: string;
     age: number;
     gender: string;
     prediction: Prediction;
