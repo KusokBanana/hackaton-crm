@@ -35,7 +35,14 @@
     </div>
   </div>
 
-  <p *ngIf="task.date">Последний срок: {{ task.date | date:'dd.MM' }}</p>
+  <p *ngIf="active && typeText">
+    {{ typeText }} ({{ chances * 100 | number }}%)
+  </p>
+
+  <div class="mb-2">
+    <div *ngIf="task.date">Последний срок: {{ task.date | date:'dd.MM' }}</div>
+    <div *ngIf="task.description">Комментарий: {{ task.description }}</div>
+  </div>
 
   <div class="peers fxw-nw ai-c lh-1 justify-content-between">
 
@@ -44,7 +51,7 @@
         <img class="w-2r bdrs-50p" src="https://randomuser.me/api/portraits/men/10.jpg" alt="">
       </div>
       <div class="peer">
-        <span class="fsz-sm c-grey-900">Мария Сергеевна Кудряшова</span>
+        <span class="fsz-sm c-grey-900">{{ task.client.name }}</span>
       </div>
     </a>
 
@@ -84,7 +91,6 @@
 </div>
 
 
-
 <div bsModal #modal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -103,7 +109,7 @@
 
           <div class="form-group">
             <label class="col-form-label text-right">Статус:</label>
-            <select class="form-control" placeholder="Описание" formControlName="status">
+            <select class="form-control"formControlName="status">
               <option value="success">Успешно</option>
               <option value="fail">Неудачно</option>
             </select>

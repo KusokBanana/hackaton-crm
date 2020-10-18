@@ -7,7 +7,7 @@
     <div class="masonry-item col-12">
       <div class="bd bgc-white">
         <div>
-            <app-client *ngFor="let client of clients$ | async" [client]="client"></app-client>
+            <app-client *ngFor="let client of clients$ | async; trackBy: trackByFn" [client]="client"></app-client>
         </div>
       </div>
     </div>

@@ -37,10 +37,14 @@ class TaskController extends AbstractController
      */
     public function active(): JsonResponse
     {
-        $tasks = $this->taskRepository->findBy(['status' => [Task::TASK_STATUS_OPENED]], ['createdAt' => 'DESC']);
+        $filter = ['status' => [Task::TASK_STATUS_OPENED]];
+        $order = ['createdAt' => 'DESC'];
+        $tasks = $this->taskRepository->findBy($filter, $order, 100);
+        $total = $this->taskRepository->count($filter);
 
         return $this->json([
             'data' => $tasks,
+            'total' => $total,
         ]);
     }
 
@@ -49,10 +53,14 @@ class TaskController extends AbstractController
      */
     public function inactive(): JsonResponse
     {
-        $tasks = $this->taskRepository->findBy(['status' => [Task::TASK_STATUS_FAIL, Task::TASK_STATUS_SUCCESS]], ['closedAt' => 'DESC']);
+        $filter = ['status' => [Task::TASK_STATUS_FAIL, Task::TASK_STATUS_SUCCESS]];
+        $order = ['closedAt' => 'DESC'];
+        $tasks = $this->taskRepository->findBy($filter, $order, 100);
+        $total = $this->taskRepository->count($filter);
 
         return $this->json([
             'data' => $tasks,
+            'total' => $total,
         ]);
     }
 
@@ -84,9 +92,9 @@ class TaskController extends AbstractController
             $request->query->get('description'),
             $request->query->get('type'),
             $date,
-            (bool) $request->query->get('phone'),
-            (bool) $request->query->get('email'),
-            (bool) $request->query->get('chat'),
+            $request->query->get('phone') === 'true',
+            $request->query->get('email') === 'true',
+            $request->query->get('chat') === 'true',
         );
 
         $this->entityManager->persist($task);

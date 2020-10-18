@@ -15,6 +15,9 @@ final class TaskNormalizer implements NormalizerInterface, NormalizerAwareInterf
     {
         /** @var Task $result */
 
+        $client = $result->getClient();
+        $prediction = $client->getPrediction();
+
         return [
             'id'          => $result->getId(),
             'created_at'  => $result->getCreatedAt(),
@@ -25,6 +28,18 @@ final class TaskNormalizer implements NormalizerInterface, NormalizerAwareInterf
             'phone'       => $result->getPhone(),
             'email'       => $result->getEmail(),
             'chat'        => $result->getChat(),
+            'client'      => [
+                'id'     => $client->getId(),
+                'age'    => $client->getAge(),
+                'name'   => $client->getName(),
+                'gender' => $client->getGenderCode(),
+                'active' => $client->getCity(),
+                'prediction' => [
+                    'mortgage_chance'        => $prediction->getMortgageChance(),
+                    'consumer_credit_chance' => $prediction->getConsumerCreditChance(),
+                    'credit_card_chance' => $prediction->getCreditCardChance(),
+                ],
+            ]
         ];
     }
 

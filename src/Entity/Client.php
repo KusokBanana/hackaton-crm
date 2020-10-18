@@ -26,6 +26,11 @@ class Client
     private int $age;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $name;
+
+    /**
      * @ORM\Column(type="string", length=1)
      */
     private string $genderCode;
@@ -114,6 +119,11 @@ class Client
     public function getAge(): int
     {
         return $this->age;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getGenderCode(): string

@@ -21,6 +21,16 @@ class Task
         self::TASK_STATUS_FAIL,
     ];
 
+    const TASK_TYPE_MORTGAGE = 'mortgage';
+    const TASK_TYPE_CONSUMER_CREDIT = 'consumer_credit';
+    const TASK_TYPE_CREDIT_CARD = 'credit_card';
+
+    const TASK_TYPES = [
+        self::TASK_TYPE_MORTGAGE,
+        self::TASK_TYPE_CONSUMER_CREDIT,
+        self::TASK_TYPE_CREDIT_CARD,
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
@@ -88,12 +98,12 @@ class Task
     public function __construct(
         Client $client,
         string $name,
-        ?string $description,
-        ?string $type,
-        ?\DateTimeInterface $date,
-        bool $phone,
-        bool $email,
-        bool $chat
+        ?string $description = null,
+        ?string $type = null,
+        ?\DateTimeInterface $date = null,
+        bool $phone = false,
+        bool $email = false,
+        bool $chat = false
     )
     {
         $this->createdAt = new \DateTime();

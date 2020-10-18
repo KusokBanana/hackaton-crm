@@ -8,18 +8,20 @@
 
       <div class="statistic">
         <p class="clearfix">
-          <span class="statistic-title float-left">8 заданий выполнено из 10</span>
+          <span class="statistic-title float-left">{{ completedCount }} заданий выполнено из {{ activeCount + completedCount }}</span>
           <span class="float-right">Показывать: Эта неделя</span>
         </p>
-        <progressbar [value]="55"></progressbar>
+        <progressbar [value]="activeCount / (activeCount + completedCount)"></progressbar>
       </div>
 
-      <app-task *ngFor="let task of activeTasks$ | async" [task]="task" (change)="reload()" [active]="true"></app-task>
+      <app-task *ngFor="let task of activeTasks$ | async; trackBy: trackByFn" 
+        [task]="task" (change)="reload()" [active]="true"></app-task>
 
     </div>
     <div class="col-sm-5 block">
 
-      <app-task *ngFor="let task of completedTasks$ | async" [task]="task" (change)="reload()" [active]="false"></app-task>
+      <app-task *ngFor="let task of completedTasks$ | async; trackBy: trackByFn" 
+        [task]="task" (change)="reload()" [active]="false"></app-task>
 
     </div>
   

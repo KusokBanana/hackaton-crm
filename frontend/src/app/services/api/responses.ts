@@ -4,19 +4,21 @@ export interface ClientsResponse {
 
 export interface TasksResponse {
     data: Task[];
+    total: number;
 }
 
 export interface Client {
     id: number;
+    name: string;
     age: number;
     gender: string;
-    prediction?: Prediction;
+    prediction: Prediction;
 }
 
 export interface Prediction {
     mortgage_chance: number;
     consumer_credit_chance: number;
-    get_credit_card_chance: number;
+    credit_card_chance: number;
 }
 
 export interface Task {
@@ -29,4 +31,11 @@ export interface Task {
     phone: boolean;
     email: boolean;
     chat: boolean;
+    client: Client;
+}
+
+export enum TaskTypes {
+    mortgage = 'mortgage',
+    consumer_credit = 'consumer_credit',
+    credit_card = 'credit_card',
 }
