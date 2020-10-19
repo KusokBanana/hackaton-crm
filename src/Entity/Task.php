@@ -46,7 +46,7 @@ class Task
     private Client $client;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private \DateTimeInterface $createdAt;
 

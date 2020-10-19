@@ -38,7 +38,7 @@ class TaskController extends AbstractController
     public function active(): JsonResponse
     {
         $filter = ['status' => [Task::TASK_STATUS_OPENED]];
-        $order = ['createdAt' => 'DESC'];
+        $order = ['id' => 'DESC'];
         $tasks = $this->taskRepository->findBy($filter, $order, 100);
         $total = $this->taskRepository->count($filter);
 
