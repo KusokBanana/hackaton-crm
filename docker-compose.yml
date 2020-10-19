@@ -2,7 +2,7 @@ version: '3'
 
 services:
     database:
-        image: postgres
+        image: postgres:12.4
         container_name: crm_db
         restart: always
         ports:
@@ -60,6 +60,20 @@ services:
             - /var/www/node_modules
         networks:
             - symfony
+    
+    # prediction:
+    #     container_name: prediction
+    #     build:
+    #         context: ./prediction
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - 80:8822
+    #     environment:
+    #         POSTGRES_PASSWORD: ${DB_PASSWORD}
+    #         POSTGRES_USER: ${DB_USER}
+    #         POSTGRES_DB: ${DB_NAME}
+    #     networks:
+    #         - symfony
 
 networks:
     symfony:
